@@ -1,12 +1,12 @@
 # child process ipc
 `/!\ require nodejs v14 (if you use docker make sure docker have the right version for node) /!\`
-`for test and maintain the path in index work without alt:v if you need to add in alt:v look doc`
-`actually the path in index is './child/child.js' but on alt:v this relative path not work`
+#
+`actually the path in index is './child/child.js' but on alt:v this relative path not work change the path if you need to use in alt`
 
 # Table of Contents
 ##### 1. [Init](#Init)
 ##### 2. [Event System](#event)
-
+##### 3. [Benchmark](#benchmark)
 ## Init
 ###### 1) init child process
 #
@@ -66,4 +66,11 @@ ipc.onCallBack("addition", (data1,data2)=>{
 
 ipc.send('myEvent',5,6)
 ```
-
+# benchmark
+##### for callback response with ipc
+on alt dev branch
+`1ms`
+on alt release branch (slow due to event loop problem on release branch)
+`50ms`
+on node program (it's very fast on node program)
+`0.2000 ms`
