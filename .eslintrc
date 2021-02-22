@@ -1,0 +1,20 @@
+{
+    "env": {
+        "es2020": true,
+        "node": true
+    },
+    "extends": [
+        "standard"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-tabs": 0,
+        "indent": [2, 4],
+        "quotes": [0, "double", { "avoidEscape": true, "allowTemplateLiterals": true }],
+        "eqeqeq": [0, "allow-null", { "null": "ignore" }]
+    }
+}

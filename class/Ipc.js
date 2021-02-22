@@ -3,47 +3,47 @@ import EventManager from './EventManager.js'
 export default class Ipc extends EventManager {
     process
 
-    constructor(process){
+    constructor (process) {
         super()
         this.process = process
-        this.process.on('message', (message)=>{
+        this.process.on('message', (message) => {
             this.onMessage(message)
-        });
+        })
         this.send("ready")
     }
 
-    send(event,...data){
+    send (event, ...data) {
         const arg = [...data]
-        let ret = {}
-        
+        const ret = {}
+
         ret.data = arg
         ret.event = event
         this.process.send(ret)
     }
 
-    sendCb(event, cb, ...args){ // for the game
-        const arg = [this.saveCbRef(cb),...args]
-        let ret = {}
-        
+    sendCb (event, cb, ...args) { // for the game
+        const arg = [this.saveCbRef(cb), ...args]
+        const ret = {}
+
         ret.data = arg
         ret.event = event
         this.process.send(ret)
     }
 
-    sendAsync(eventName, ...args){
-        return new Promise((resolve,reject) =>{
-            this.sendCb(eventName,(...values) =>{
-                if (values.length > 1){
+    sendAsync (eventName, ...args) {
+        return new Promise((resolve, reject) => {
+            this.sendCb(eventName, (...values) => {
+                if (values.length > 1) {
                     resolve(values)
-                }else{
+                } else {
                     resolve(...values)
                 }
             }, ...args)
-            setTimeout(()=>{ reject(new Error("timeout reject fork process"))},10000)
+            setTimeout(() => { reject(new Error("timeout reject fork process")) }, 10000)
         })
     }
 
-    onMessage(message){
+    onMessage (message) {
         this.call(message.event, ...message.data)
     }
 }

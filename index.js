@@ -1,30 +1,29 @@
 import Fork from './class/Fork.js'
 
-const childProcess = new Fork("./child/child.js",{})
-childProcess.on("myEvent", function(data,data2){
+const childProcess = new Fork("./child/child.js", {})
+childProcess.on("myEvent", function (data, data2) {
     console.log("passe dans my event")
-    console.log(data,data2)
+    console.log(data, data2)
 })
 
-
-async function test(){
-    const rslt = await childProcess.sendAsync("addition", 1,2)
+async function test () {
+    const rslt = await childProcess.sendAsync("addition", 1, 2)
     console.log("result of addition is ", rslt)
     childProcess.send("myEvent")
 
-    const [calc,secondParameter] = await childProcess.sendAsync("twoParameterExemple",10,10)
+    const [calc, secondParameter] = await childProcess.sendAsync("twoParameterExemple", 10, 10)
     console.log(calc)
     console.log(secondParameter)
-    childProcess.sendCb("addition", (value)=>{
+    childProcess.sendCb("addition", (value) => {
         console.log("passe dans send cb value = ", value)
-    }, 5,5)
+    }, 5, 5)
 }
 
 childProcess.on('ready', async () => {
     test()
 })
 
-//test()
+// test()
 
 /*
 setTimeout(async ()=>{
@@ -37,4 +36,4 @@ setTimeout(async ()=>{
     childProcess.sendCb("addition", (value)=>{
         console.log("passe dans send cb value = ", value)
     }, 5,5)
-},1000)*/
+},1000) */
