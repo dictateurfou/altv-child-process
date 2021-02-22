@@ -70,7 +70,9 @@ ipc.send('myEvent',5,6)
 ##### for callback response with ipc
 on alt dev branch
 `1ms`
+#
 on alt release branch (slow due to event loop problem on release branch)
 `50ms`
+#
 on node program (it's very fast on node program)
 `0.2000 ms`
