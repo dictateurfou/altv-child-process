@@ -1,5 +1,7 @@
 # child process ipc
 `/!\ require nodejs v14 (if you use docker make sure docker have the right version for node) /!\`
+`for test and maintain the path in index work without alt:v if you need to add in alt:v look doc`
+`actually the path in index is './child/child.js' but on alt:v this relative path not work`
 
 # Table of Contents
 ##### 1. [Init](#Init)
